@@ -92,14 +92,11 @@ public List<Cliente> listarTudo(){
             rs = ps.executeQuery();
             while(rs.next()){
                 Cliente cliente = new Cliente();
-                Sexo sexo = new Sexo();
+                SexoDAO dao = new SexoDAO();
                 cliente.setId(rs.getInt("cli_id"));
                 cliente.setNome(rs.getString("cli_nome"));
                 cliente.setCpf(rs.getString("cli_cpf"));
-                sexo.setId(rs.getInt("sex_id"));
-                sexo.setSexo(rs.getString("sex_sexo"));
-                sexo.setSigla(rs.getString("sex_sigla").charAt(0));
-                cliente.setSexo(sexo);
+                cliente.setSexo(dao.buscaPorId(rs.getInt("cli_sex_id")));
                 clientes.add(cliente);
             }
             rs.close();
@@ -122,14 +119,11 @@ public Cliente buscarPorCpf(String cpf){
             rs = ps.executeQuery();
             if(rs.next()){
                 Cliente cliente = new Cliente();
-                Sexo sexo = new Sexo();
+                SexoDAO dao = new SexoDAO();
                 cliente.setId(rs.getInt("cli_id"));
                 cliente.setNome(rs.getString("cli_nome"));
                 cliente.setCpf(rs.getString("cli_cpf"));
-                sexo.setId(rs.getInt("sex_id"));
-                sexo.setSexo(rs.getString("sex_sexo"));
-                sexo.setSigla(rs.getString("sex_sigla").charAt(0));
-                cliente.setSexo(sexo);
+                cliente.setSexo(dao.buscaPorId(rs.getInt("cli_sex_id")));
                 rs.close();
                 ps.close();
                 db.disconnect();                
