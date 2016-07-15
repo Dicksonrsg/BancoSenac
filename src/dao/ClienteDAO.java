@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
-import model.Sexo;
+
 
 public class ClienteDAO {
     
@@ -96,7 +96,7 @@ public List<Cliente> listarTudo(){
                 cliente.setId(rs.getInt("cli_id"));
                 cliente.setNome(rs.getString("cli_nome"));
                 cliente.setCpf(rs.getString("cli_cpf"));
-                cliente.setSexo(dao.buscaPorId(rs.getInt("cli_sex_id")));
+                cliente.setSexo(dao.buscarPorId(rs.getInt("cli_sex_id")));
                 clientes.add(cliente);
             }
             rs.close();
@@ -123,7 +123,7 @@ public Cliente buscarPorCpf(String cpf){
                 cliente.setId(rs.getInt("cli_id"));
                 cliente.setNome(rs.getString("cli_nome"));
                 cliente.setCpf(rs.getString("cli_cpf"));
-                cliente.setSexo(dao.buscaPorId(rs.getInt("cli_sex_id")));
+                cliente.setSexo(dao.buscarPorId(rs.getInt("cli_sex_id")));
                 rs.close();
                 ps.close();
                 db.disconnect();                

@@ -21,5 +21,14 @@ public class ClienteController {
         }
         return false;
     }
-    
+
+public void listar(){
+    ClienteDAO cdao = new ClienteDAO();
+    for(Cliente c : cdao.listarTudo()){
+        System.out.println("Id: " + c.getId() +
+                "\tCPF: " + c.getCpf() + 
+                "\tNome: " + c.getNome() + 
+                "\tSexo: " + c.getSexo().getSigla());
+    }
+}
 }
