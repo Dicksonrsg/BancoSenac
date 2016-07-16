@@ -63,7 +63,7 @@ return false;
     }
 public boolean editar(Cliente cliente){
         if (db.connect()){
-            sql = "UPDATE tb_clientes SET cli_nome ?, cli_cpf = ?, cli_sex_id = ?, WHERE cli_id = ?";
+            sql = "UPDATE tb_clientes SET cli_nome = ?, cli_cpf = ?, cli_sex_id = ?, WHERE cli_id = ?";
         try{
             ps = db.connection.prepareStatement(sql);
             ps.setString(1, cliente.getNome());
@@ -116,6 +116,35 @@ public Cliente buscarPorCpf(String cpf){
         try{
             ps = db.connection.prepareStatement(sql);
             ps.setString(1, cpf);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                Cliente cliente = new Cliente();
+                SexoDAO dao = new SexoDAO();
+                cliente.setId(rs.getInt("cli_id"));
+                cliente.setNome(rs.getString("cli_nome"));
+                cliente.setCpf(rs.getString("cli_cpf"));
+                cliente.setSexo(dao.buscarPorId(rs.getInt("cli_sex_id")));
+                rs.close();
+                ps.close();
+                db.disconnect();                
+                return cliente;
+            }
+            rs.close();
+            ps.close();
+            db.disconnect();
+        }catch(SQLException error){
+            return null;
+}
+}
+return null;   
+}
+
+public Cliente buscarPorId(int id){
+        if (db.connect()){
+            sql = "SELECT * FROM tb_clientes JOIN tb_sexos ON sex_id = cli_sex_id WHERE cli_id = ?";
+        try{
+            ps = db.connection.prepareStatement(sql);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if(rs.next()){
                 Cliente cliente = new Cliente();
