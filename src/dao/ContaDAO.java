@@ -77,7 +77,7 @@ public class ContaDAO {
     
     public List<Conta> listAll(){
         if(db.connect()){
-            List<Conta> contas = new ArrayList();
+            List<Conta> contas = new ArrayList<Conta>();
             sql = "SELECT * FROM tb_contas JOIN tb_clientes ON cli_id = cnt_cli_id";
             try{
                 ps = db.connection.prepareStatement(sql);

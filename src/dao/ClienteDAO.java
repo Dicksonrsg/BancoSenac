@@ -85,7 +85,7 @@ return false;
 
 public List<Cliente> listarTudo(){
         if (db.connect()){
-            List<Cliente> clientes = new ArrayList(); 
+            List<Cliente> clientes = new ArrayList<Cliente>(); 
             sql = "SELECT * FROM tb_clientes JOIN tb_sexos ON sex_id = cli_sex_id";
         try{
             ps = db.connection.prepareStatement(sql);
