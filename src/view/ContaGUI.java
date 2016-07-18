@@ -123,5 +123,53 @@ public class ContaGUI {
 		}		
 	}
 	
-	public void exeCon(){}
+	public void exeCon(){
+		int call = -1;
+		do{
+			System.out.println(
+					"******* Menu Conta *******"
+					+"\n1-Abrir Conta"
+					+"\n2-Listar Todas"
+					+"\n3-Mostrar por Cliente"
+					+"\n4-Mostrar por Conta Id"
+					+"\n5-Deposito"
+					+"\n6-Saque"
+					+"\n7-Transferencia"
+					+"\n8-Atualizar Conta"
+					+"\n9-Deletar Conta"
+					+"\n0-Sair"
+					+"\n************************"
+					+"\nOpçâo: ");
+			call = input.nextInt();
+			switch(call){
+				case 1:
+					inserir();
+					break;
+				case 2:
+					listAll();
+					break;
+				case 3:
+					listByCliente();
+					break;
+				case 4:
+					listByCntId();
+					break;
+				case 5:
+					deposito();
+					break;
+				case 6:
+					saque();
+					break;
+				case 7:
+					transf();
+					break;
+				case 8:
+					editCnt();
+					break;
+				case 9:
+					excluir();
+					break;
+			}
+		}while(call != 0);
+	}
 }
