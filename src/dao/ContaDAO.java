@@ -125,8 +125,9 @@ public class ContaDAO {
         return null;
     }
     
-    public Conta listByCli(int id){
+    public List<Conta> listByCli(int id){
         if(db.connect()){
+            List<Conta> contas = new ArrayList<Conta>();        	
             sql = "SELECT * FROM tb_contas JOIN tb_clientes ON cli_id = cnt_cli_id WHERE cnt_cli_id  = ?";
             try{
                 ps = db.connection.prepareStatement(sql);
@@ -138,10 +139,10 @@ public class ContaDAO {
                     conta.setId(rs.getInt("cnt_id"));
                     conta.setSaldo(rs.getFloat("cnt_saldo"));
                     conta.setCliente(cldao.buscarPorId(rs.getInt("cnt_cli_id")));
+                    contas.add(conta);
                     rs.close();
                     ps.close();
                     db.disconnect();
-                    return conta;
                 }
                 rs.close();
                 ps.close();

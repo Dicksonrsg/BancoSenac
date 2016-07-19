@@ -14,13 +14,15 @@ public class ContaGUI {
 	
 	ContaDAO cod = new ContaDAO();
 	
-	Conta con = new Conta();
+	int id = 0, id1 = 0, id2 = 0;
+	float real = 0;
+	
 	
 	public ContaGUI(){}
 	
 	public void inserir(){
 		System.out.print("Cliente Id: ");
-		int id = input.nextInt();
+		id = input.nextInt();
 		System.out.print("Saldo: ");
 		float saldo = input.nextFloat();
 		
@@ -39,88 +41,50 @@ public class ContaGUI {
 	}
 	
 	public void listByCliente(){		
-		System.out.print("Cliente id: ");
-		con = cod.listByCli(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente");
-		}else{
-			System.out.println(con.toString());
-		}
+		System.out.println("Cliente id: ");
+		id = input.nextInt();
+		coc.listByCli(id);
 	}
 	
 	public void listByCntId(){
-		System.out.print("Conta Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			System.out.println(con.toString());
-		}
+		System.out.print("Conta id:");
+		coc.listConta(id);
 	}
 	
 	public void deposito(){
-		System.out.print("Conta Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			System.out.print("Deposito, R$: ");
-			con.setSaldo(con.getSaldo() + input.nextFloat());
-		}		
+		System.out.print("Conta id: ");
+		id = input.nextInt();
+		System.out.print("Deposito, R$: ");
+		real = input.nextFloat();
+		
+		coc.deposito(id, real);
 	}
 	
 	public void saque(){
-		System.out.print("Conta Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			System.out.print("Saque, R$: ");
-			con.setSaldo(con.getSaldo() - input.nextFloat());
-		}		
+		System.out.print("Conta id: ");
+		id = input.nextInt();
+		System.out.print("Saque, R$: ");
+		real = input.nextFloat();
+		
+		coc.saque(id, real);
 	}
 	
 	public void transf(){
-		float r = 0;
-		System.out.print("Valor R$: ");
-		r = input.nextFloat();
+		System.out.print("Conta origem: ");
+		id1 = input.nextInt();
+		System.out.print("Transferencia, R$: ");
+		real = input.nextFloat();
+		System.out.print("Conta beneficiada: ");
+		id2 = input.nextInt();
 		
-		System.out.print("Conta Origem Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			con.setSaldo(con.getSaldo() - r);
-		}
-		
-		System.out.print("Conta Beneficiada Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			con.setSaldo(con.getSaldo() + r);
-		}		
-	}
-	
-	public void editCnt(){
-		System.out.print("Conta Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			System.out.print("Novo Saldo R$: ");
-			con.setSaldo(input.nextFloat());
-		}		
+		coc.transf(id1, id2, real);
+				
 	}
 	
 	public void excluir(){
-		System.out.print("Conta Id: ");
-		con  = cod.listById(input.nextInt());
-		if (con == null){
-			System.out.println("Conta inexistente.");
-		}else{
-			cod.delete(con);
-		}		
+		System.out.println("Informe Id da conta a ser excluida, Id: ");
+		id = input.nextInt();
+		coc.delete(id);
 	}
 	
 	public void exeCon(){
@@ -135,8 +99,7 @@ public class ContaGUI {
 					+"\n5-Deposito"
 					+"\n6-Saque"
 					+"\n7-Transferencia"
-					+"\n8-Atualizar Conta"
-					+"\n9-Deletar Conta"
+					+"\n8-Deletar Conta"
 					+"\n0-Sair"
 					+"\n************************"
 					+"\nOpçâo: ");
@@ -164,9 +127,6 @@ public class ContaGUI {
 					transf();
 					break;
 				case 8:
-					editCnt();
-					break;
-				case 9:
 					excluir();
 					break;
 			}

@@ -14,9 +14,7 @@ public class ClienteGui {
     
     ClienteController cc = new ClienteController();
     
-    ClienteDAO cd = new ClienteDAO();
-    
-    Cliente cli = new Cliente();
+    int id = 0;
     
     public ClienteGui(){}
     
@@ -39,41 +37,21 @@ public class ClienteGui {
     
     public void buscarPorId(){
     	System.out.print("Digite Cliente Id: ");
-    	cli = cd.buscarPorId(input.nextInt());
-    	if(cli == null){
-    		System.out.println("Cliente não encontrado");
-    	}else{
-    		System.out.println(cli.toString());
-    	}
+    	cc.listById(id = input.nextInt());
     }
     
     public void editCliente(){
     	System.out.print("Digite Cliente Id: ");
-    	cli = cd.buscarPorId(input.nextInt());
-    	if(cli == null){
-    		System.out.println("Cliente não encontrado");
-    	}else{
-    		System.out.print("Novo nome: ");
-    		cli.setNome(input.next());
-    		System.out.print("Novo CPF: ");
-    		cli.setCpf(input.next());		
-    	}    	
+    	cc.editCli(id = input.nextInt());
     }
     
     public void deleteCli(){
     	System.out.print("Cliente id: ");
-    	cli = cd.buscarPorId(input.nextInt());
-    	if(cli == null){
-    		System.out.println("Cliente não encontrado");
-    	}else{
-    		cd.excluir(cli);
-    	}    	
+    	cc.excluirCli(id = input.nextInt());
     }
     
     public void listAll(){
-    	for(Cliente c1 : cd.listarTudo()){
-    		System.out.println(c1.toString());
-    	}
+    	cc.listar();
     }
     
     public void exeCli(){
